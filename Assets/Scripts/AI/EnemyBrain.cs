@@ -15,6 +15,7 @@ public class EnemyBrain : MonoBehaviour
     [Header("References")]
     public NavMeshAgent agent;
     public Transform player;
+    public Renderer enemyRenderer;
 
     [Header("Maze Patrol Settings")]
     // Список точок лабіринту, які ми налаштуємо в інспекторі Unity
@@ -47,6 +48,9 @@ public class EnemyBrain : MonoBehaviour
     private void Start()
     {
         if (agent == null) agent = GetComponent<NavMeshAgent>();
+
+
+        if (enemyRenderer == null) enemyRenderer = GetComponent<Renderer>();
 
         // Стартуємо з патрулювання
         StateMachine.Initialize(PatrolState);

@@ -6,18 +6,25 @@ public class ChaseState : EnemyState
 
     public override void Update()
     {
-        // якщо втратили гравц€ з пол€ зору -> йдемо на пошуки
+        // якщо втратили гравц€ з пол€ зору, то виходить на пошуки
         if (!enemy.CanSeePlayer())
         {
             enemy.lastKnownPlayerPosition = enemy.player.position;
             stateMachine.ChangeState(enemy.SearchState);
             return;
+
         }
 
         // ѕост≥йно б≥жимо за гравцем
         if (enemy.player != null)
         {
             enemy.agent.SetDestination(enemy.player.position);
+
         }
+    }
+
+    public override void Enter()
+    {
+        enemy.enemyRenderer.material.color = Color.red;
     }
 }

@@ -6,7 +6,7 @@ public class ReturnState : EnemyState
 
     public override void Enter()
     {
-        // Просто перемикаємо назад у патруль
+        // Просто знову повертається у режим шукання
         stateMachine.ChangeState(enemy.PatrolState);
     }
 }
