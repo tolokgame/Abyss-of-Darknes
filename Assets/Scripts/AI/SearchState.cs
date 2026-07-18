@@ -11,7 +11,7 @@ public class SearchState : EnemyState
         searchTimer = enemy.searchDuration;
         enemy.agent.SetDestination(enemy.lastKnownPlayerPosition);
 
-        enemy.enemyRenderer.material.color = Color.green;
+        enemy.enemyRenderer.material.color = Color.yellow;
     }
 
     public override void Update()
@@ -35,8 +35,5 @@ public class SearchState : EnemyState
         }
     }
 
-    public override void Exit()
-    {
-        enemy.enemyRenderer.material.color = Color.green;
-    }
+
 }
