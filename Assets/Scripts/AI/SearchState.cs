@@ -11,10 +11,28 @@ public class SearchState : EnemyState
         searchTimer = enemy.searchDuration;
         enemy.agent.SetDestination(enemy.lastKnownPlayerPosition);
 
-        enemy.enemyRenderer.material.color = Color.yellow;
     }
 
     public override void Update()
+    {
+        // якщо п≥д час пошуку знову пом≥тили гравц€ -> б≥жимо за ним (червон≥Їмо)
+        if (enemy.CanSeePlayer())
+        {
+            stateMachine.ChangeState(enemy.ChaseState);
+            return;
+        }
+
+        // “ј…ћ≈– ћј™ ÷ќ ј“» «ј¬∆ƒ», а не т≥льки коли приб≥гли!
+        searchTimer -= Time.deltaTime;
+
+        if (searchTimer <= 0)
+        {
+            // „ас вийшов Ч йдемо в патруль
+            stateMachine.ChangeState(enemy.PatrolState);
+        }
+    }
+
+    /*public override void Update()
     {
         // якщо п≥д час пошуку знову пом≥тили гравц€, то знову ганаЇмс€ за ним!
         if (enemy.CanSeePlayer())
@@ -30,9 +48,15 @@ public class SearchState : EnemyState
             if (searchTimer <= 0)
             {
                 // „ас вийшов, гравц€ немаЇ, значить що?правильно йдемо в стан поверненн€
-                stateMachine.ChangeState(enemy.ReturnState);
+                stateMachine.ChangeState(enemy.PatrolState);
             }
         }
+    }*/
+
+
+    public override void Exit()
+    {
+  
     }
 
 

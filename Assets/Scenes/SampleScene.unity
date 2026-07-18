@@ -490,7 +490,7 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 100000
+  m_Intensity: 10000
   m_Range: 17
   m_SpotAngle: 179
   m_InnerSpotAngle: 170.8021
@@ -553,7 +553,7 @@ Transform:
   m_GameObject: {fileID: 888241343}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.141, y: 0.20499992, z: 0.723}
+  m_LocalPosition: {x: -0.141, y: 0.20499992, z: 1.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -731,8 +731,8 @@ MonoBehaviour:
   - {fileID: 1611015074}
   minPatrolWaitTime: 1
   maxPatrolWaitTime: 4
-  viewRadius: 17
-  viewAngle: 225
+  viewRadius: 10
+  viewAngle: 45
   playerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -893,7 +893,7 @@ Transform:
   m_GameObject: {fileID: 1100578808}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.93, y: 3.31, z: 6.69}
+  m_LocalPosition: {x: -15.93, y: 3.31, z: -26.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

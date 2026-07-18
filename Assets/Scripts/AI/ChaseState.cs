@@ -25,6 +25,6 @@ public class ChaseState : EnemyState
 
     public override void Enter()
     {
-        enemy.enemyRenderer.material.color = Color.red;
+       
     }
 }

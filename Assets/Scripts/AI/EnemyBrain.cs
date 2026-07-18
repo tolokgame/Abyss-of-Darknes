@@ -58,7 +58,22 @@ public class EnemyBrain : MonoBehaviour
 
     private void Update()
     {
+        // 1. Спочатку оновлюємо логіку поточного стану
         StateMachine.CurrentState.Update();
+
+        // 2. А тепер ЗАВЖДИ і залізобетонно керуємо кольором залежно від стану
+        if (StateMachine.CurrentState == ChaseState)
+        {
+            enemyRenderer.material.color = Color.red; // Погоня -> Червоний
+        }
+        else if (StateMachine.CurrentState == SearchState)
+        {
+            enemyRenderer.material.color = Color.yellow; // Пошук -> Жовтий
+        }
+        else
+        {
+            enemyRenderer.material.color = Color.green; // У всіх інших випадках (Патруль) -> Зелений
+        }
     }
 
     // Метод перевірки зору, який тепер використовують стани
