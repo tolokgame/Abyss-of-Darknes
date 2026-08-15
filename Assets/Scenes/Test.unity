@@ -43366,6 +43366,7 @@ MonoBehaviour:
   blinkInterval: 10
   blinkDuration: 0.15
   blinkKey: 103
+  holdBlinkKey: 104
 --- !u!4 &250600318
 Transform:
   m_ObjectHideFlags: 0
@@ -196217,7 +196218,8 @@ PrefabInstance:
       value: EnemyProtoype
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1185495676354434280, guid: 828401aac292a614cad9f698cdf33acf, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 828401aac292a614cad9f698cdf33acf, type: 3}
@@ -196281,8 +196283,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8502949257627244527, guid: 64c5594414cf28e4c9fba4fb6ec39700, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6577921655074227732}
   m_SourcePrefab: {fileID: 100100000, guid: 64c5594414cf28e4c9fba4fb6ec39700, type: 3}
+--- !u!1 &6577921655074227731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8502949257627244527, guid: 64c5594414cf28e4c9fba4fb6ec39700, type: 3}
+  m_PrefabInstance: {fileID: 6577921655074227730}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6577921655074227732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577921655074227731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de6dd77882ad7b43a08b98cba590b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  Health: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
