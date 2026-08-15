@@ -21,6 +21,22 @@ public class ChaseState : EnemyState
             enemy.agent.SetDestination(enemy.player.position);
 
         }
+
+        if (enemy.player != null)
+        {
+            float distance = Vector3.Distance(
+                enemy.transform.position,
+                enemy.player.position
+            );
+
+            if (distance <= enemy.attackRange)
+            {
+                stateMachine.ChangeState(enemy.AttackState);
+                return;
+            }
+
+            enemy.agent.SetDestination(enemy.player.position);
+        }
     }
 
     public override void Enter()

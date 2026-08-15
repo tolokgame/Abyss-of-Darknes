@@ -12,6 +12,13 @@ public class EnemyBrain : MonoBehaviour
     public SearchState SearchState { get; private set; }
     public ReturnState ReturnState { get; private set; }
 
+    public AttackState AttackState { get; private set; }
+
+    [Header("Attack Settings")]
+    public float attackRange = 5f;
+    public float attackDamage = 1f;
+    public float attackCooldown = 1f;
+
     [Header("References")]
     public NavMeshAgent agent;
     public Transform player;
@@ -43,6 +50,7 @@ public class EnemyBrain : MonoBehaviour
         ChaseState = new ChaseState(this, StateMachine);
         SearchState = new SearchState(this, StateMachine);
         ReturnState = new ReturnState(this, StateMachine);
+        AttackState = new AttackState(this, StateMachine);
     }
 
     private void Start()
