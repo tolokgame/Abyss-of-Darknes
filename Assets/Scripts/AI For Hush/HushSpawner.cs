@@ -35,6 +35,84 @@ public class HushSpawner : MonoBehaviour
             PlayerCamera.transform.rotation
         );
 
+        // Перевіряємо, який саме скрипт висить на спавнем об'єкті
+        HushAI hush = enemy.GetComponent<HushAI>();
+        if (hush != null)
+        {
+            hush.Initialize(Player, PlayerCamera, this);
+        }
+
+        HusherAI husher = enemy.GetComponent<HusherAI>();
+        if (husher != null)
+        {
+            husher.Initialize(Player, PlayerCamera, this);
+        }
+
+        IsEnemyAlive = true;
+    }
+
+    public void EnemyDied()
+    {
+        IsEnemyAlive = false;
+    }
+
+    private IEnumerator SpawnLoop()
+    {
+        while (true)
+        {
+            float randomTime = Random.Range(MinInterval, MaxInterval);
+            yield return new WaitForSeconds(randomTime);
+
+            if (!IsEnemyAlive)
+            {
+                SpawnEnemy();
+            }
+        }
+    }
+}
+
+
+
+
+
+
+/*using System.Collections;
+using UnityEngine;
+
+public class HushSpawner : MonoBehaviour
+{
+    [SerializeField] private GameObject[] EnemyPrefabs;
+    [SerializeField] private Camera PlayerCamera;
+    [SerializeField] private GameObject Player;
+
+    private bool IsEnemyAlive;
+
+    public float MinInterval = 10f;
+    public float MaxInterval = 30f;
+
+    private void Start()
+    {
+        StartCoroutine(SpawnLoop());
+    }
+
+    private void SpawnEnemy()
+    {
+        if (IsEnemyAlive)
+            return;
+
+        GameObject EnemyPrefab =
+            EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)];
+
+        Vector3 spawnPosition =
+            PlayerCamera.transform.position +
+            PlayerCamera.transform.forward * 5f;
+
+        GameObject enemy = Instantiate(
+            EnemyPrefab,
+            spawnPosition,
+            PlayerCamera.transform.rotation
+        );
+
         HushAI hush = enemy.GetComponent<HushAI>();
         hush.Initialize(Player, PlayerCamera, this);
 
@@ -123,7 +201,7 @@ public class HushSpawner : MonoBehaviour
 
 
 
-/*using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class HushSpawner : MonoBehaviour
