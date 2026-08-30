@@ -57,9 +57,9 @@ public class RealityCheckObject : MonoBehaviour
             transform.position
         );
 
-        // =========================================
-        // РЕЖИМ 1 — Disappear Forever включён
-        // =========================================
+        
+        // Режим 1 — Disappear Forever включен
+        
 
         if (disappearForever)
         {
@@ -71,17 +71,17 @@ public class RealityCheckObject : MonoBehaviour
             return;
         }
 
-        // =========================================
-        // РЕЖИМ 2 — Disappear Forever выключен
-        // =========================================
+        
+        // Режим 2 — Disappear Forever выключен
+        
 
-        // Подошли — исчезаем.
+        // Подошли — исчезает.
         if (distance <= disappearDistance && isVisible)
         {
             StartFade(false);
         }
 
-        // Отошли — появляемся.
+        // Отошли — появляеться.
         if (distance >= appearDistance && !isVisible)
         {
             StartFade(true);
@@ -134,12 +134,12 @@ public class RealityCheckObject : MonoBehaviour
 
         if (show)
         {
-            // Объект полностью появился.
+            // Объект появился.
             SetCollidersEnabled(true);
         }
         else
         {
-            // Объект полностью исчез.
+            // Объект исчез.
             SetCollidersEnabled(false);
 
             // Renderer выключается только после fade.
