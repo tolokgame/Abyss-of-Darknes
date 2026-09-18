@@ -17,12 +17,14 @@ public class PlayerController : MonoBehaviour
     public float groundCheckDistance = 1.2f;
 
     private CharacterController controller;
+    private PlayerState playerState;
     private Vector3 velocity;
     private float xRotation = 0f;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        playerState = GetComponent<PlayerState>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -30,7 +32,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Look();
+        // якщо гравець Ќ≈ схований Ч дозвол€Їмо рухати камерою
+        if (playerState == null || !playerState.IsHidden)
+        {
+            Look();
+        }
+
         Move();
     }
 
@@ -48,12 +55,27 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        // якщо гравець схований Ч рух заборонений
+        if (playerState != null && playerState.IsHidden)
+        {
+            velocity.x = 0f;
+            velocity.z = 0f;
+
+            // «бер≥гаЇмо грав≥тац≥ю
+            velocity.y += gravity * Time.deltaTime;
+
+            controller.Move(velocity * Time.deltaTime);
+
+            return;
+        }
+
         // ѕерев≥р€Їмо, чи стоњмо на земл≥
         bool isGrounded = Physics.Raycast(
             transform.position,
             Vector3.down,
             groundCheckDistance,
-            groundMask);
+            groundMask
+        );
 
         // якщо стоњмо на земл≥ та падаЇмо
         if (isGrounded && velocity.y < 0)
@@ -66,6 +88,7 @@ public class PlayerController : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
+
         controller.Move(move * moveSpeed * Time.deltaTime);
 
         // —трибок
