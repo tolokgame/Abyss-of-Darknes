@@ -32,27 +32,6 @@ public class SearchState : EnemyState
         }
     }
 
-    /*public override void Update()
-    {
-        // якщо п≥д час пошуку знову пом≥тили гравц€, то знову ганаЇмс€ за ним!
-        if (enemy.CanSeePlayer())
-        {
-            stateMachine.ChangeState(enemy.ChaseState);
-            return;
-        }
-
-        //  оли приб≥гли на останнЇ м≥сце зустр≥ч≥
-        if (!enemy.agent.pathPending && enemy.agent.remainingDistance <= enemy.agent.stoppingDistance)
-        {
-            searchTimer -= Time.deltaTime;
-            if (searchTimer <= 0)
-            {
-                // „ас вийшов, гравц€ немаЇ, значить що?правильно йдемо в стан поверненн€
-                stateMachine.ChangeState(enemy.PatrolState);
-            }
-        }
-    }*/
-
 
     public override void Exit()
     {

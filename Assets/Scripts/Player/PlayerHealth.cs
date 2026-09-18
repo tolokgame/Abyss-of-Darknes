@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Death()
     {
+        CheckpointManager.Instance?.NotifyPlayerDeath(gameObject);
         Destroy(gameObject);
     }
 }

@@ -7,6 +7,11 @@ public class ChaseState : EnemyState
 
     public override void Update()
     {
+        // якщо Player був знищений Ч просто чекаЇмо,
+        // поки EnemyBrain знайде нового п≥сл€ respawn.
+        if (enemy.player == null)
+            return;
+
         // якщо втратили гравц€ з пол€ зору Ч шукаЇмо
         if (!enemy.CanSeePlayer())
         {
@@ -16,20 +21,16 @@ public class ChaseState : EnemyState
         }
 
         // Ѕ≥жимо за гравцем
-        if (enemy.player != null)
+        enemy.agent.SetDestination(enemy.player.position);
+
+        float distance = Vector3.Distance(
+            enemy.transform.position,
+            enemy.player.position
+        );
+
+        if (distance <= enemy.attackRange)
         {
-            enemy.agent.SetDestination(enemy.player.position);
-
-            float distance = Vector3.Distance(
-                enemy.transform.position,
-                enemy.player.position
-            );
-
-            if (distance <= enemy.attackRange)
-            {
-                stateMachine.ChangeState(enemy.AttackState);
-                return;
-            }
+            stateMachine.ChangeState(enemy.AttackState);
         }
     }
 
@@ -43,49 +44,46 @@ public class ChaseState : EnemyState
 
 
 
+
+
 /*using UnityEngine;
 
 public class ChaseState : EnemyState
 {
-    public ChaseState(EnemyBrain enemy, EnemyStateMachine stateMachine) : base(enemy, stateMachine) { }
+    public ChaseState(EnemyBrain enemy, EnemyStateMachine stateMachine)
+        : base(enemy, stateMachine) { }
 
     public override void Update()
     {
-        // якщо втратили гравц€ з пол€ зору, то виходить на пошуки
+        // якщо Player був знищений Ч просто чекаЇмо,
+        // поки EnemyBrain знайде нового п≥сл€ respawn.
+        if (enemy.player == null)
+            return;
+
+        // якщо втратили гравц€ з пол€ зору Ч шукаЇмо
         if (!enemy.CanSeePlayer())
         {
             enemy.lastKnownPlayerPosition = enemy.player.position;
             stateMachine.ChangeState(enemy.SearchState);
             return;
-
         }
 
-        // ѕост≥йно б≥жимо за гравцем
-        if (enemy.player != null)
+        // Ѕ≥жимо за гравцем
+        enemy.agent.SetDestination(enemy.player.position);
+
+        float distance = Vector3.Distance(
+            enemy.transform.position,
+            enemy.player.position
+        );
+
+        if (distance <= enemy.attackRange)
         {
-            enemy.agent.SetDestination(enemy.player.position);
-
-        }
-
-        if (enemy.player != null)
-        {
-            float distance = Vector3.Distance(
-                enemy.transform.position,
-                enemy.player.position
-            );
-
-            if (distance <= enemy.attackRange)
-            {
-                stateMachine.ChangeState(enemy.AttackState);
-                return;
-            }
-
-            enemy.agent.SetDestination(enemy.player.position);
+            stateMachine.ChangeState(enemy.AttackState);
         }
     }
 
     public override void Enter()
     {
-       
     }
-}*/
+}
+*/
