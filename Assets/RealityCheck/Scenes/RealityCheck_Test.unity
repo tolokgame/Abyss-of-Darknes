@@ -245,8 +245,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RealityCheckObject
   player: {fileID: 1869777050}
+  disappearForever: 0
   disappearDistance: 2.5
   appearDistance: 3.5
+  fadeDuration: 0.5
 --- !u!1 &1543958078
 GameObject:
   m_ObjectHideFlags: 0
