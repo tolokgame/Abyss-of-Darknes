@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class NoteItem : MonoBehaviour
 {
-    [Header("Текст записки")]
+    [Header("Настройки Записки")]
+    public string noteTitle = "Записка 1";
     [TextArea(6, 12)]
     public string noteContent = "Никогда не теряй надежды.\nНе знаешь, что делать? Оглянись вокруг.";
 

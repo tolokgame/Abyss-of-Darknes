@@ -32,7 +32,7 @@ public class PlayerInteraction : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.X))
                 {
-                    NoteUIManager.Instance.OpenNote(targetNote.noteContent, targetNote.gameObject);
+                    NoteUIManager.Instance.OpenNote(targetNote);
                     ResetTarget();
                 }
                 return;
