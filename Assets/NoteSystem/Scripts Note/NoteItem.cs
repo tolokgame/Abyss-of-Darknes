@@ -2,15 +2,26 @@ using UnityEngine;
 
 public class NoteItem : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("Текст записки")]
+    [TextArea(6, 12)]
+    public string noteContent = "Никогда не теряй надежды.\nНе знаешь, что делать? Оглянись вокруг.";
+
+    [Header("Материалы")]
+    public Material defaultMaterial;
+    public Material highlightMaterial;
+
+    private Renderer meshRenderer;
+
+    private void Awake()
     {
-        
+        meshRenderer = GetComponent<Renderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetHighlight(bool isHighlighted)
     {
-        
+        if (meshRenderer != null && highlightMaterial != null && defaultMaterial != null)
+        {
+            meshRenderer.material = isHighlighted ? highlightMaterial : defaultMaterial;
+        }
     }
 }
