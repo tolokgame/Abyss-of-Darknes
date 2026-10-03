@@ -10,7 +10,8 @@ public class NoteUIManager : MonoBehaviour
     public TextMeshProUGUI noteTextDisplay;
     public GameObject interactionPrompt;
     public GameObject bottomPromptText;
-    public GameObject inventoryPanel; // Ссылка на панель инвентаря
+    public TextMeshProUGUI bottomPromptTextMesh;
+    public GameObject inventoryPanel;
 
     [Header("Отключение движения при чтении")]
     public MonoBehaviour[] scriptsToDisable;
@@ -19,6 +20,7 @@ public class NoteUIManager : MonoBehaviour
     public bool isReading = false;
     private NoteItem currentNoteItem;
     private bool isFromInventory = false;
+    private int currentSlotIndex = -1;
 
     private void Awake()
     {
@@ -38,30 +40,42 @@ public class NoteUIManager : MonoBehaviour
         isReading = true;
         isFromInventory = false;
         currentNoteItem = note;
+        currentSlotIndex = -1;
 
         if (noteTextDisplay != null) noteTextDisplay.text = note.noteContent;
         if (noteUIPanel != null) noteUIPanel.SetActive(true);
         if (interactionPrompt != null) interactionPrompt.SetActive(false);
-        if (bottomPromptText != null) bottomPromptText.SetActive(true);
 
-        // Прячем инвентарь во время чтения
+        if (bottomPromptText != null)
+        {
+            bottomPromptText.SetActive(true);
+            if (bottomPromptTextMesh != null)
+                bottomPromptTextMesh.text = "[E] Взять        [X] Закрыть";
+        }
+
         if (inventoryPanel != null) inventoryPanel.SetActive(false);
 
         SetPlayerControl(false);
     }
 
-    public void OpenNoteFromInventory(string content)
+    public void OpenNoteFromInventory(int slotIndex, string title, string content)
     {
         isReading = true;
         isFromInventory = true;
         currentNoteItem = null;
+        currentSlotIndex = slotIndex;
 
         if (noteTextDisplay != null) noteTextDisplay.text = content;
         if (noteUIPanel != null) noteUIPanel.SetActive(true);
         if (interactionPrompt != null) interactionPrompt.SetActive(false);
-        if (bottomPromptText != null) bottomPromptText.SetActive(true);
 
-        // Прячем инвентарь во время чтения
+        if (bottomPromptText != null)
+        {
+            bottomPromptText.SetActive(true);
+            if (bottomPromptTextMesh != null)
+                bottomPromptTextMesh.text = "[F] Выбросить        [X] Закрыть";
+        }
+
         if (inventoryPanel != null) inventoryPanel.SetActive(false);
 
         SetPlayerControl(false);
@@ -71,11 +85,10 @@ public class NoteUIManager : MonoBehaviour
     {
         isReading = false;
         if (noteUIPanel != null) noteUIPanel.SetActive(false);
-
-        // Возвращаем инвентарь на экран
         if (inventoryPanel != null) inventoryPanel.SetActive(true);
 
         currentNoteItem = null;
+        currentSlotIndex = -1;
 
         SetPlayerControl(true);
     }
@@ -89,6 +102,15 @@ public class NoteUIManager : MonoBehaviour
             {
                 Destroy(currentNoteItem.gameObject);
             }
+        }
+        CloseNote();
+    }
+
+    public void DropCurrentNote()
+    {
+        if (isFromInventory && currentSlotIndex != -1)
+        {
+            InventoryManager.Instance.DropNote(currentSlotIndex);
         }
         CloseNote();
     }
@@ -118,6 +140,10 @@ public class NoteUIManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && !isFromInventory)
             {
                 TakeNote();
+            }
+            if (Input.GetKeyDown(KeyCode.F) && isFromInventory)
+            {
+                DropCurrentNote();
             }
         }
     }
