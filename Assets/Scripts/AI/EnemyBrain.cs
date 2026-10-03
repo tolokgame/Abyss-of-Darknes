@@ -11,8 +11,6 @@ public class EnemyBrain : MonoBehaviour
     public ChaseState ChaseState { get; private set; }
     public SearchState SearchState { get; private set; }
     public ReturnState ReturnState { get; private set; }
-<<<<<<< Updated upstream
-=======
     public AttackState AttackState { get; private set; }
 
     [Header("Attack Settings")]
@@ -217,7 +215,6 @@ public class EnemyBrain : MonoBehaviour
     public float attackRange = 5f;
     public float attackDamage = 1f;
     public float attackCooldown = 1f;
->>>>>>> Stashed changes
 
     [Header("References")]
     public NavMeshAgent agent;
@@ -251,6 +248,7 @@ public class EnemyBrain : MonoBehaviour
         ChaseState = new ChaseState(this, StateMachine);
         SearchState = new SearchState(this, StateMachine);
         ReturnState = new ReturnState(this, StateMachine);
+        AttackState = new AttackState(this, StateMachine);
     }
 
     private void Start()
@@ -382,13 +380,9 @@ public class EnemyBrain : MonoBehaviour
             );
         }
     }
-<<<<<<< Updated upstream
-}
-=======
 } 
 */
 
 
 
 
->>>>>>> Stashed changes

@@ -30,12 +30,7 @@ public class ChaseState : EnemyState
 
         if (distance <= enemy.attackRange)
         {
-<<<<<<< Updated upstream
-            enemy.agent.SetDestination(enemy.player.position);
-
-=======
             stateMachine.ChangeState(enemy.AttackState);
->>>>>>> Stashed changes
         }
     }
 
