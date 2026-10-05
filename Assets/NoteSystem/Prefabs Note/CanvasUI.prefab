@@ -409,6 +409,10 @@ MonoBehaviour:
   noteUIPanel: {fileID: 3212810596058371378}
   noteTextDisplay: {fileID: 1579201817668094055}
   interactionPrompt: {fileID: 7471041414675089340}
+  bottomPromptText: {fileID: 5004671390823669555}
+  scriptsToDisable:
+  - {fileID: 0}
+  - {fileID: 0}
   isReading: 0
 --- !u!1 &5004671390823669555
 GameObject:
@@ -427,7 +431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8479053125608544774
 RectTransform:
   m_ObjectHideFlags: 0
@@ -475,7 +479,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "[E] \u0412\u0437\u044F\u0442\u044C   [X]\u0417\u0430\u043A\u0440\u044B\u0442\u044C"
+  m_text: "[E][ESC]\u0417\u0430\u043A\u0440\u044B\u0442\u044C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

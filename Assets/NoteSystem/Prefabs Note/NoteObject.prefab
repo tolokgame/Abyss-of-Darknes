@@ -148,9 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 210242db5666c9c4e83369e60c812509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoteItem
+  noteTitle: "\u0417\u0430\u043F\u0438\u0441\u043A\u0430 1"
   noteContent: "\u041D\u0438\u043A\u043E\u0433\u0434\u0430 \u043D\u0435 \u0442\u0435\u0440\u044F\u0439
     \u043D\u0430\u0434\u0435\u0436\u0434\u044B.\n\u041D\u0435 \u0437\u043D\u0430\u0435\u0448\u044C,
     \u0447\u0442\u043E \u0434\u0435\u043B\u0430\u0442\u044C? \u041E\u0433\u043B\u044F\u043D\u0438\u0441\u044C
     \u0432\u043E\u043A\u0440\u0443\u0433."
   defaultMaterial: {fileID: 2100000, guid: 66ab9fae438bb4349b4a49f6495772a8, type: 2}
-  highlightMaterial: {fileID: 0}
+  highlightMaterial: {fileID: 2100000, guid: 4befebc3916df284fa3f43db56438a30, type: 2}

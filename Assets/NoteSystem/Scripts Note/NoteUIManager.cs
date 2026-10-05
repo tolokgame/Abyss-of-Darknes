@@ -5,22 +5,17 @@ public class NoteUIManager : MonoBehaviour
 {
     public static NoteUIManager Instance;
 
-    [Header("UI Элементы")]
+    [Header("UI Елементи")]
     public GameObject noteUIPanel;
     public TextMeshProUGUI noteTextDisplay;
     public GameObject interactionPrompt;
     public GameObject bottomPromptText;
-    public TextMeshProUGUI bottomPromptTextMesh;
-    public GameObject inventoryPanel;
 
-    [Header("Отключение движения при чтении")]
+    [Header("Вимкнення руху при читанні")]
     public MonoBehaviour[] scriptsToDisable;
 
     [HideInInspector]
     public bool isReading = false;
-    private NoteItem currentNoteItem;
-    private bool isFromInventory = false;
-    private int currentSlotIndex = -1;
 
     private void Awake()
     {
@@ -38,45 +33,11 @@ public class NoteUIManager : MonoBehaviour
     public void OpenNote(NoteItem note)
     {
         isReading = true;
-        isFromInventory = false;
-        currentNoteItem = note;
-        currentSlotIndex = -1;
 
         if (noteTextDisplay != null) noteTextDisplay.text = note.noteContent;
         if (noteUIPanel != null) noteUIPanel.SetActive(true);
         if (interactionPrompt != null) interactionPrompt.SetActive(false);
-
-        if (bottomPromptText != null)
-        {
-            bottomPromptText.SetActive(true);
-            if (bottomPromptTextMesh != null)
-                bottomPromptTextMesh.text = "[E] Взять        [X] Закрыть";
-        }
-
-        if (inventoryPanel != null) inventoryPanel.SetActive(false);
-
-        SetPlayerControl(false);
-    }
-
-    public void OpenNoteFromInventory(int slotIndex, string title, string content)
-    {
-        isReading = true;
-        isFromInventory = true;
-        currentNoteItem = null;
-        currentSlotIndex = slotIndex;
-
-        if (noteTextDisplay != null) noteTextDisplay.text = content;
-        if (noteUIPanel != null) noteUIPanel.SetActive(true);
-        if (interactionPrompt != null) interactionPrompt.SetActive(false);
-
-        if (bottomPromptText != null)
-        {
-            bottomPromptText.SetActive(true);
-            if (bottomPromptTextMesh != null)
-                bottomPromptTextMesh.text = "[F] Выбросить        [X] Закрыть";
-        }
-
-        if (inventoryPanel != null) inventoryPanel.SetActive(false);
+        if (bottomPromptText != null) bottomPromptText.SetActive(true);
 
         SetPlayerControl(false);
     }
@@ -85,34 +46,8 @@ public class NoteUIManager : MonoBehaviour
     {
         isReading = false;
         if (noteUIPanel != null) noteUIPanel.SetActive(false);
-        if (inventoryPanel != null) inventoryPanel.SetActive(true);
-
-        currentNoteItem = null;
-        currentSlotIndex = -1;
 
         SetPlayerControl(true);
-    }
-
-    public void TakeNote()
-    {
-        if (currentNoteItem != null && !isFromInventory)
-        {
-            bool added = InventoryManager.Instance.AddNoteToInventory(currentNoteItem.noteTitle, currentNoteItem.noteContent);
-            if (added)
-            {
-                Destroy(currentNoteItem.gameObject);
-            }
-        }
-        CloseNote();
-    }
-
-    public void DropCurrentNote()
-    {
-        if (isFromInventory && currentSlotIndex != -1)
-        {
-            InventoryManager.Instance.DropNote(currentSlotIndex);
-        }
-        CloseNote();
     }
 
     private void SetPlayerControl(bool isEnabled)
@@ -133,17 +68,10 @@ public class NoteUIManager : MonoBehaviour
     {
         if (isReading)
         {
-            if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape))
+            // Тепер будь-яка з цих клавіш (X, Escape або E) просто закриває записку
+            if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
             {
                 CloseNote();
-            }
-            if (Input.GetKeyDown(KeyCode.E) && !isFromInventory)
-            {
-                TakeNote();
-            }
-            if (Input.GetKeyDown(KeyCode.F) && isFromInventory)
-            {
-                DropCurrentNote();
             }
         }
     }
