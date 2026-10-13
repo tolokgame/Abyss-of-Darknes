@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
+
+    [SerializeField] private OpenDoor doorToOpen;
     private void OnTriggerEnter(Collider other)
     {
         PlayerInventory inventory = other.GetComponent<PlayerInventory>();
@@ -14,6 +16,11 @@ public class Key : MonoBehaviour
 
     private void UseKey()
     {
+        if(doorToOpen = null)
+        {
+            doorToOpen.OpenTheDoor();
+        }
         
+        Destroy(gameObject);
     }
 }
