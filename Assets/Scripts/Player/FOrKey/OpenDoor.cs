@@ -2,11 +2,23 @@ using UnityEngine;
 
 public class OpenDoor : MonoBehaviour
 {
+    private Animator doorAnimator;
+
+    void Start()
+    {
+        doorAnimator = GetComponent<Animator>();
+    }
+
     public void OpenTheDoor()
     {
-        Debug.Log("Door is opened mafaka");
-
-        GetComponent<Animator>().enabled = true;
-        Destroy(gameObject, 2f);
+        if (doorAnimator != null)
+        {
+            doorAnimator.Play("Door_Open");
+            Debug.Log("Двері відчиняються через функцію OpenTheDoor!");
+        }
+        else
+        {
+            Debug.LogError("На дверях немає компонента Animator!");
+        }
     }
 }
