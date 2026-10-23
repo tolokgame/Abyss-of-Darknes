@@ -63,75 +63,72 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        // Якщо гравець схований — рух заборонений
         if (playerState != null && playerState.IsHidden)
         {
             velocity.x = 0f;
             velocity.z = 0f;
-
-            // Зберігаємо гравітацію
             velocity.y += gravity * Time.deltaTime;
-
             controller.Move(velocity * Time.deltaTime);
-
             return;
         }
 
-        // Перевіряємо, чи стоїмо на землі
-        bool isGrounded = Physics.Raycast(
-            transform.position,
-            Vector3.down,
-            groundCheckDistance,
-            groundMask
-        );
+        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundMask);
 
-        // Якщо стоїмо на землі та падаємо
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
 
-        // Рух по XZ
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        // Логіка присідання: утримуємо кнопку LeftControl (можна змінити на свій варіант)
+        isCrouching = Input.GetKey(KeyCode.LeftControl);
 
-        // Стрибок
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        // Зміна швидкості залежно від стану
+        float currentSpeed = isCrouching ? crouchSpeed : moveSpeed;
+        controller.Move(move * currentSpeed * Time.deltaTime);
+
+        // Стрибок (дозволено лише якщо не присіли)
+        if (Input.GetButtonDown("Jump") && isGrounded && !isCrouching)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        // Присідання
-        if (Input.GetButtonDown("Crouch") && isGrounded)
-        {
-            isCrouching = !isCrouching;
-        }
-
+        // Розрахунок цільової висоти
         float targetHeight = isCrouching ? crouchHeight : standingHeight;
 
-        controller.height = Mathf.Lerp(
-            controller.height,
-            targetHeight,
-            crouchSpeed * Time.deltaTime
-        );
+        // Плавна зміна висоти (використовуємо MoveTowards для стабільної швидкості)
+        controller.height = Mathf.MoveTowards(controller.height, targetHeight, crouchSpeed * Time.deltaTime);
 
+        // Коригування центру коллайдера
         controller.center = new Vector3(
             standingCenter.x,
             standingCenter.y - (standingHeight - controller.height) / 2f,
             standingCenter.z
         );
 
-        // Гравітація
-        velocity.y += gravity * Time.deltaTime;
+        // Оновлення позиції камери (щоб вона опускалася разом із присіданням)
+        if (cameraHolder != null)
+        {
+            // Припускаємо, що початкова висота камери дорівнює standingHeight - 0.2f (підлаштуйте під себе)
+            float cameraY = controller.height - 0.2f;
+            cameraHolder.localPosition = new Vector3(cameraHolder.localPosition.x, cameraY, cameraHolder.localPosition.z);
+        }
 
-        // Рух по Y
+        // Гравітація та рух по Y
+        velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+
 }
+
+
+
+
+
+
 
 /*using UnityEngine;
 
