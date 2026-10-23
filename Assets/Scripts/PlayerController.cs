@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpHeight = 2f;
     public float gravity = -9.81f;
+    public float crouchHeight = 1f;
+    public float crouchSpeed = 5f;
 
     [Header("Mouse")]
     public Transform cameraHolder;
@@ -20,6 +22,9 @@ public class PlayerController : MonoBehaviour
     private PlayerState playerState;
     private Vector3 velocity;
     private float xRotation = 0f;
+    private float standingHeight;
+    private Vector3 standingCenter;
+    private bool isCrouching;
 
     private void Start()
     {
@@ -28,6 +33,9 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        standingHeight = controller.height;
+        standingCenter = controller.center;
     }
 
     private void Update()
@@ -96,6 +104,26 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+
+        // Присідання
+        if (Input.GetButtonDown("Crouch") && isGrounded)
+        {
+            isCrouching = !isCrouching;
+        }
+
+        float targetHeight = isCrouching ? crouchHeight : standingHeight;
+
+        controller.height = Mathf.Lerp(
+            controller.height,
+            targetHeight,
+            crouchSpeed * Time.deltaTime
+        );
+
+        controller.center = new Vector3(
+            standingCenter.x,
+            standingCenter.y - (standingHeight - controller.height) / 2f,
+            standingCenter.z
+        );
 
         // Гравітація
         velocity.y += gravity * Time.deltaTime;
