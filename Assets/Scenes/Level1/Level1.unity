@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 14801572}
   - component: {fileID: 14801573}
+  - component: {fileID: 14801574}
   m_Layer: 0
   m_Name: OpenTriger
   m_TagString: Untagged
@@ -163,8 +164,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcae68944f485ec4096993c7a4b5bed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorOpener
-  doorToOpen: {fileID: 1495767936}
+  doorToOpen: {fileID: 1425737526}
   keyRequired: {fileID: 11400000, guid: 7bc84f526c187e543b3b865662879490, type: 2}
+--- !u!65 &14801574
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14801571}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.26, y: 2.68, z: 3.14}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!43 &36809301
 Mesh:
   m_ObjectHideFlags: 0
@@ -10216,7 +10238,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425737521}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: adc0924342fe7104b9ead7f3f919916b, type: 2}
   m_CullingMode: 0
@@ -10230,6 +10252,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1425737526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425737521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb41e9b67c4e5044fa86dd58014527be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OpenDoor
 --- !u!43 &1435528341
 Mesh:
   m_ObjectHideFlags: 0
@@ -10764,23 +10798,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!1 &1495767932 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2495547180667038072, guid: 57383360fc9017c41a1599af10ef63f7, type: 3}
-  m_PrefabInstance: {fileID: 8782945241699992423}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1495767936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495767932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb41e9b67c4e5044fa86dd58014527be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OpenDoor
 --- !u!1001 &1510390336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14178,6 +14195,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2268512807430917059, guid: 57383360fc9017c41a1599af10ef63f7, type: 3}
+    - {fileID: 2267449814987372549, guid: 57383360fc9017c41a1599af10ef63f7, type: 3}
+    - {fileID: 4257344957662539667, guid: 57383360fc9017c41a1599af10ef63f7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8278338577426465619, guid: 57383360fc9017c41a1599af10ef63f7, type: 3}
@@ -14187,9 +14206,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2597692928548877070, guid: 57383360fc9017c41a1599af10ef63f7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1425737525}
-    - targetCorrespondingSourceObject: {fileID: 2495547180667038072, guid: 57383360fc9017c41a1599af10ef63f7, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 2597692928548877070, guid: 57383360fc9017c41a1599af10ef63f7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1495767936}
+      addedObject: {fileID: 1425737526}
   m_SourcePrefab: {fileID: 100100000, guid: 57383360fc9017c41a1599af10ef63f7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -13,7 +13,7 @@ public class OpenDoor : MonoBehaviour
     {
         if (doorAnimator != null)
         {
-            doorAnimator.Play("Door_Open");
+            doorAnimator.SetTrigger("Open");
             Debug.Log("ƒвер≥ в≥дчин€ютьс€ через функц≥ю OpenTheDoor!");
         }
         else
