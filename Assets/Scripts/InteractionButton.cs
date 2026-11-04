@@ -33,6 +33,11 @@ public class InteractionButton : MonoBehaviour
 
     private void Update()
     {
+        if (NoteUIManager.BlocksGameplayInput)
+        {
+            return;
+        }
+
         // Перевірка: гравець поруч, кнопка активна (не натиснута прямо зараз) і натиснута клавіша E
         if (playerInZone && !isPressed && Input.GetKeyDown(KeyCode.E))
         {
