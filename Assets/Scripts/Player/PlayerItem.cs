@@ -9,6 +9,12 @@ public class PlayerItem : MonoBehaviour
 
     private void Update()
     {
+        if (NoteUIManager.BlocksGameplayInput)
+        {
+            return;
+        }
+
+        Debug.Log(Input.GetKeyDown(pickUpKey));
         // Якщо гравець поруч І він натиснув клавішу 'E'
         if (inventoryInRange != null && Input.GetKeyDown(pickUpKey))
         {
@@ -29,7 +35,7 @@ public class PlayerItem : MonoBehaviour
         if (playerInventory != null)
         {
             inventoryInRange = playerInventory; // Запам'ятовуємо інвентар гравця
-
+            Debug.Log($"[Item] Натисніть {pickUpKey}, щоб підібрати {itemData?.itemName}");
         }
     }
 
@@ -42,7 +48,7 @@ public class PlayerItem : MonoBehaviour
         if (playerInventory != null && inventoryInRange == playerInventory)
         {
             inventoryInRange = null; // Забуваємо інвентар, підібрати більше не можна
-
+            Debug.Log("[Item] Гравець відійшов від предмета.");
         }
     }
 }

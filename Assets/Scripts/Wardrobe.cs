@@ -25,6 +25,11 @@ public class Wardrobe : MonoBehaviour
 
     private void Update()
     {
+        if (NoteUIManager.BlocksGameplayInput)
+        {
+            return;
+        }
+
         if (isPlayerInZone && Input.GetKeyDown(interactKey))
         {
             if (!isPlayerInside)
