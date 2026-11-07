@@ -504,6 +504,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 600228759712390124, guid: 027bacb9a4fe0ae49973a9cb598acc98, type: 3}
+      propertyPath: m_Intensity
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 701555403199304916, guid: 027bacb9a4fe0ae49973a9cb598acc98, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -547,6 +551,22 @@ PrefabInstance:
     - target: {fileID: 3145573847630794960, guid: 027bacb9a4fe0ae49973a9cb598acc98, type: 3}
       propertyPath: m_Name
       value: SpectralEntity
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335179733974999423, guid: 027bacb9a4fe0ae49973a9cb598acc98, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335179733974999423, guid: 027bacb9a4fe0ae49973a9cb598acc98, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335179733974999423, guid: 027bacb9a4fe0ae49973a9cb598acc98, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.5254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335179733974999423, guid: 027bacb9a4fe0ae49973a9cb598acc98, type: 3}
+      propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
