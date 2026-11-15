@@ -9,6 +9,12 @@ public class PlayerItem : MonoBehaviour
 
     private void Update()
     {
+        if (NoteUIManager.BlocksGameplayInput)
+        {
+            return;
+        }
+
+        Debug.Log(Input.GetKeyDown(pickUpKey));
         // якщо гравець поруч ≤ в≥н натиснув клав≥шу 'E'
         if (inventoryInRange != null && Input.GetKeyDown(pickUpKey))
         {
@@ -20,7 +26,7 @@ public class PlayerItem : MonoBehaviour
             }
         }
     }
-
+   
     // √равець п≥д≥йшов до предмета
     private void OnTriggerEnter(Collider other)
     {

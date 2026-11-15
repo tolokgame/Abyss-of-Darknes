@@ -1,28 +1,43 @@
 using UnityEngine;
 
+[DisallowMultipleComponent]
+[RequireComponent(typeof(MeshRenderer))]
 public class NoteItem : MonoBehaviour
 {
-    [Header("Настройки Записки")]
-    public string noteTitle = "Записка 1";
+    [Header("Note Content")]
+    public string noteTitle = "Note";
     [TextArea(6, 12)]
-    public string noteContent = "Никогда не теряй надежды.\nНе знаешь, что делать? Оглянись вокруг.";
+    public string noteContent;
 
-    [Header("Материалы")]
-    public Material defaultMaterial;
+    [Header("Highlight")]
     public Material highlightMaterial;
 
     private Renderer meshRenderer;
+    private Material originalMaterial;
+    private bool isHighlighted;
 
     private void Awake()
     {
         meshRenderer = GetComponent<Renderer>();
+        originalMaterial = meshRenderer.sharedMaterial;
+
+        if (highlightMaterial == null)
+        {
+            throw new System.InvalidOperationException($"Note '{name}' requires a highlight material.");
+        }
     }
 
     public void SetHighlight(bool isHighlighted)
     {
-        if (meshRenderer != null && highlightMaterial != null && defaultMaterial != null)
+        this.isHighlighted = isHighlighted;
+        meshRenderer.sharedMaterial = isHighlighted ? highlightMaterial : originalMaterial;
+    }
+
+    private void OnDisable()
+    {
+        if (isHighlighted)
         {
-            meshRenderer.material = isHighlighted ? highlightMaterial : defaultMaterial;
+            SetHighlight(false);
         }
     }
 }
