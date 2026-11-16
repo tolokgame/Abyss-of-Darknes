@@ -7,6 +7,7 @@ public class PlayerInteraction : MonoBehaviour
     [Header("Interaction Ray")]
     public float interactDistance = 3.5f;
     public LayerMask interactLayer;
+    public LayerMask IgnoretLayer;
 
     private NoteItem targetNote;
     private NoteUIManager noteUIManager;
@@ -42,8 +43,8 @@ public class PlayerInteraction : MonoBehaviour
         RaycastHit hit;
 
         // Hit the nearest solid surface first so walls can block interaction.
-        if (Physics.Raycast(ray, out hit, interactDistance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore) &&
-            (interactLayer.value & (1 << hit.collider.gameObject.layer)) != 0)
+        if (Physics.Raycast(ray, out hit, interactDistance, IgnoretLayer))
+            
         {
             NoteItem note = hit.collider.GetComponentInParent<NoteItem>();
             if (note != null && note.isActiveAndEnabled)
