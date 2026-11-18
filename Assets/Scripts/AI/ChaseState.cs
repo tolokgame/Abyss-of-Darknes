@@ -36,7 +36,20 @@ public class ChaseState : EnemyState
 
     public override void Enter()
     {
+        base.Enter();
+        // Повідомляємо менеджеру, що почалася погоня
+        if (ChaseMusicManager.Instance != null)
+            ChaseMusicManager.Instance.StartChase();
     }
+
+    public override void Exit()
+    {
+        base.Exit();
+        // Повідомляємо менеджеру, що погоня закінчилася
+        if (ChaseMusicManager.Instance != null)
+            ChaseMusicManager.Instance.StopChase();
+    }
+
 }
 
 
