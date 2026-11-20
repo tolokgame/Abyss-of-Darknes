@@ -37,6 +37,72 @@ public class ChaseState : EnemyState
     public override void Enter()
     {
         base.Enter();
+
+        // Повідомляємо менеджерам, що почалася погоня
+        if (ChaseMusicManager.Instance != null)
+            ChaseMusicManager.Instance.StartChase();
+
+        if (ChaseCameraShakeManager.Instance != null)
+            ChaseCameraShakeManager.Instance.StartChase();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        // Повідомляємо менеджерам, що погоня закінчилася
+        if (ChaseMusicManager.Instance != null)
+            ChaseMusicManager.Instance.StopChase();
+
+        if (ChaseCameraShakeManager.Instance != null)
+            ChaseCameraShakeManager.Instance.StopChase();
+    }
+}
+
+
+
+
+
+
+/*using UnityEngine;
+
+public class ChaseState : EnemyState
+{
+    public ChaseState(EnemyBrain enemy, EnemyStateMachine stateMachine)
+        : base(enemy, stateMachine) { }
+
+    public override void Update()
+    {
+        // Якщо Player був знищений — просто чекаємо,
+        // поки EnemyBrain знайде нового після respawn.
+        if (enemy.player == null)
+            return;
+
+        // Якщо втратили гравця з поля зору — шукаємо
+        if (!enemy.CanSeePlayer())
+        {
+            enemy.lastKnownPlayerPosition = enemy.player.position;
+            stateMachine.ChangeState(enemy.SearchState);
+            return;
+        }
+
+        // Біжимо за гравцем
+        enemy.agent.SetDestination(enemy.player.position);
+
+        float distance = Vector3.Distance(
+            enemy.transform.position,
+            enemy.player.position
+        );
+
+        if (distance <= enemy.attackRange)
+        {
+            stateMachine.ChangeState(enemy.AttackState);
+        }
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
         // Повідомляємо менеджеру, що почалася погоня
         if (ChaseMusicManager.Instance != null)
             ChaseMusicManager.Instance.StartChase();
@@ -52,7 +118,7 @@ public class ChaseState : EnemyState
 
 }
 
-
+*/
 
 
 
