@@ -20,6 +20,173 @@ public class Wardrobe : MonoBehaviour
     private Vector3 previousPlayerPosition;
     private Quaternion previousPlayerRotation;
 
+    // «бер≥гаЇмо Ћќ јЋ№Ќ≤ координати камери в≥дносно гравц€
+    private Vector3 previousCameraLocalPosition;
+    private Quaternion previousCameraLocalRotation;
+
+    private void Update()
+    {
+        if (NoteUIManager.BlocksGameplayInput)
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(interactKey))
+        {
+            // якщо гравець вже всередин≥, дозвол€Їмо вийти нав≥ть €кщо в≥н вилет≥в за меж≥ тригера
+            if (isPlayerInside)
+            {
+                ExitWardrobe();
+            }
+            else if (isPlayerInZone)
+            {
+                HidePlayer();
+            }
+        }
+    }
+
+    private void HidePlayer()
+    {
+        if (playerObject == null)
+            return;
+
+        playerController = playerObject.GetComponent<PlayerController>();
+        playerState = playerObject.GetComponent<PlayerState>();
+
+        isPlayerInside = true;
+
+        previousPlayerPosition = playerObject.transform.position;
+        previousPlayerRotation = playerObject.transform.rotation;
+
+        if (playerController != null && playerController.cameraHolder != null)
+        {
+            // «апам'€товуЇмо локальну позиц≥ю та поворот
+            previousCameraLocalPosition = playerController.cameraHolder.localPosition;
+            previousCameraLocalRotation = playerController.cameraHolder.localRotation;
+        }
+
+        if (insidePoint != null)
+        {
+            playerObject.transform.position = insidePoint.position;
+            playerObject.transform.rotation = insidePoint.rotation;
+        }
+        else
+        {
+            playerObject.transform.position = transform.position;
+        }
+
+        if (cameraPoint != null && playerController != null && playerController.cameraHolder != null)
+        {
+            // —в≥тов≥ координати дл€ точки огл€ду в шаф≥ Ч це нормально
+            playerController.cameraHolder.position = cameraPoint.position;
+            playerController.cameraHolder.rotation = cameraPoint.rotation;
+        }
+
+        if (playerState != null)
+        {
+            playerState.IsHidden = true;
+        }
+    }
+
+    private void ExitWardrobe()
+    {
+        if (playerObject == null)
+            return;
+
+        if (playerState != null)
+        {
+            playerState.IsHidden = false;
+        }
+
+        if (exitPoint != null)
+        {
+            playerObject.transform.position = exitPoint.position;
+            playerObject.transform.rotation = exitPoint.rotation;
+        }
+        else
+        {
+            playerObject.transform.position = previousPlayerPosition;
+            playerObject.transform.rotation = previousPlayerRotation;
+        }
+
+        if (playerController != null && playerController.cameraHolder != null)
+        {
+            // ѕовертаЇмо камеру точно на њњ м≥сце в голов≥ гравц€
+            playerController.cameraHolder.localPosition = previousCameraLocalPosition;
+            playerController.cameraHolder.localRotation = previousCameraLocalRotation;
+        }
+
+        isPlayerInside = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player"))
+            return;
+
+        isPlayerInZone = true;
+        playerObject = other.gameObject;
+
+        playerController = playerObject.GetComponent<PlayerController>();
+        playerState = playerObject.GetComponent<PlayerState>();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Player"))
+            return;
+
+        isPlayerInZone = false;
+
+        if (!isPlayerInside)
+        {
+            playerObject = null;
+            playerController = null;
+            playerState = null;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*using UnityEngine;
+
+public class Wardrobe : MonoBehaviour
+{
+    [Header("Interaction")]
+    [SerializeField] private KeyCode interactKey = KeyCode.E;
+
+    [Header("Positions")]
+    [SerializeField] private Transform insidePoint;
+    [SerializeField] private Transform cameraPoint;
+    [SerializeField] private Transform exitPoint;
+
+    private bool isPlayerInside = false;
+    private bool isPlayerInZone = false;
+
+    private GameObject playerObject;
+    private PlayerController playerController;
+    private PlayerState playerState;
+
+    private Vector3 previousPlayerPosition;
+    private Quaternion previousPlayerRotation;
+
     private Vector3 previousCameraPosition;
     private Quaternion previousCameraRotation;
 
@@ -137,7 +304,7 @@ public class Wardrobe : MonoBehaviour
         }
     }
 }
-
+*/
 
 
 
