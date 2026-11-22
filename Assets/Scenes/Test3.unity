@@ -119,8 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
-<<<<<<< HEAD
-=======
 --- !u!1 &40563725
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +263,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> main
 --- !u!1 &908357510
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,10 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 908357512}
   - component: {fileID: 908357511}
-<<<<<<< HEAD
-=======
   - component: {fileID: 908357513}
->>>>>>> main
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -367,8 +361,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
-<<<<<<< HEAD
-=======
 --- !u!114 &908357513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,7 +592,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 828401aac292a614cad9f698cdf33acf, type: 3}
->>>>>>> main
 --- !u!1 &1256415935
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,21 +603,14 @@ GameObject:
   - component: {fileID: 1256415938}
   - component: {fileID: 1256415937}
   - component: {fileID: 1256415936}
-<<<<<<< HEAD
-=======
   - component: {fileID: 1256415939}
->>>>>>> main
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-<<<<<<< HEAD
-  m_IsActive: 1
-=======
   m_IsActive: 0
->>>>>>> main
 --- !u!81 &1256415936
 AudioListener:
   m_ObjectHideFlags: 0
@@ -701,8 +685,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
-=======
 --- !u!114 &1256415939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -952,15 +934,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d3edd8e61225734e962da5b856ffd7f, type: 3}
->>>>>>> main
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1256415938}
   - {fileID: 908357512}
-<<<<<<< HEAD
-=======
   - {fileID: 516479083}
   - {fileID: 988317321}
   - {fileID: 1056264066}
@@ -969,4 +948,3 @@ SceneRoots:
   - {fileID: 1469339577}
   - {fileID: 40563726}
   - {fileID: 1979965308}
->>>>>>> main
