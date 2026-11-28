@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Key.asset.meta
+guid: cada3391e7e2b6645a65623932d5066b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+========
 guid: f845e3a5e24fc62419e8761745c0a507
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
+>>>>>>>> main:Assets/Materials/Spirit.mat.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

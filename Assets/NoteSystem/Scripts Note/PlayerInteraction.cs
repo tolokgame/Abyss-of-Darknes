@@ -44,7 +44,6 @@ public class PlayerInteraction : MonoBehaviour
 
         // Hit the nearest solid surface first so walls can block interaction.
         if (Physics.Raycast(ray, out hit, interactDistance, IgnoretLayer))
-            
         {
             NoteItem note = hit.collider.GetComponentInParent<NoteItem>();
             if (note != null && note.isActiveAndEnabled)
